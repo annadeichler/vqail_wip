@@ -1,17 +1,17 @@
 {
-    "ep_rew_mean": 0.9322120000000003,
+    "ep_rew_mean": 0.9402399999999999,
     "parameters": {
         "batch_size": 256,
         "cnn_version": "minigrid_1",
-        "embedding_dim": 256,
-        "ent_coef": 0.009831981081356468,
+        "embedding_dim": 64,
+        "ent_coef": 0.005965893442590103,
         "gail_loss": "agent",
         "hidden_size": 128,
-        "learning_rate": 0.0001765393849660106,
+        "learning_rate": 0.0009582026783148916,
         "n_embeddings": 256,
         "n_steps": 128,
-        "policy_lr": 0.00026973558454098046,
+        "policy_lr": 0.0005612609103136697,
         "reward_factor": 1
     },
-    "run_id": "6d2yu0x3"
+    "run_id": "4mehngkr"
 }

@@ -1,17 +1,17 @@
 {
-    "ep_rew_mean": 0.90802,
+    "ep_rew_mean": 0.953524,
     "parameters": {
         "batch_size": 256,
         "cnn_version": "minigrid_2",
         "embedding_dim": 8,
-        "ent_coef": 0.00854180110697234,
+        "ent_coef": 0.005013271172153471,
         "gail_loss": "agent",
         "hidden_size": 128,
-        "learning_rate": 0.0008227672150522421,
+        "learning_rate": 0.0009250543968415296,
         "n_embeddings": 238,
         "n_steps": 128,
-        "policy_lr": 0.00043889043968188687,
+        "policy_lr": 0.0005944148652323012,
         "reward_factor": 1
     },
-    "run_id": "skpf077e"
+    "run_id": "xh5c5p71"
 }
