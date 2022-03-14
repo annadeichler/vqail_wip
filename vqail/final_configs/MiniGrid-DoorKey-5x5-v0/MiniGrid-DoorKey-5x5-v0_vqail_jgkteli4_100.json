@@ -1,0 +1,16 @@
+{
+    "ep_rew_mean": 0.947764,
+    "tag": "fm_10",
+    "parameters": {
+        "batch_size": 256,
+        "embedding_dim": 64,
+        "ent_coef": 0.006812055305850389,
+        "gail_loss": "agent",
+        "hidden_size": 100,
+        "learning_rate": 0.00029872745925413005,
+        "n_embeddings": 64,
+        "n_steps": 128,
+        "policy_lr": 0.00038867271844495545,
+        "reward_factor": 1
+    }
+}

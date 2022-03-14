@@ -1,0 +1,15 @@
+{
+    "ep_rew_mean": NaN,
+    "parameters": {
+        "batch_size": 256,
+        "embedding_dim": 64,
+        "ent_coef": 0.008777538624377964,
+        "gail_loss": "gailfo",
+        "hidden_size": 64,
+        "learning_rate": 0.0005029412558779628,
+        "n_embeddings": 8,
+        "n_steps": 128,
+        "policy_lr": 0.0006595337813647839,
+        "reward_factor": 1
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "ep_rew_mean": 0.9016480000000001,
+    "parameters": {
+        "batch_size": 256,
+        "cnn_version": "minigrid_3",
+        "embedding_dim": 8,
+        "ent_coef": 0.009607089844510116,
+        "gail_loss": "agent",
+        "hidden_size": 128,
+        "learning_rate": 0.0004456815088163944,
+        "n_embeddings": 256,
+        "n_steps": 128,
+        "policy_lr": 0.0002331387679911523,
+        "reward_factor": 1
+    },
+    "run_id": "995rpsdo"
+}

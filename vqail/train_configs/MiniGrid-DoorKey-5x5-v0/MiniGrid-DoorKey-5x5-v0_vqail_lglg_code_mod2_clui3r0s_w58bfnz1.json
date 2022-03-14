@@ -1,0 +1,17 @@
+{
+    "ep_rew_mean": 0.946828,
+    "parameters": {
+        "batch_size": 256,
+        "cnn_version": "minigrid_1",
+        "embedding_dim": 126,
+        "ent_coef": 0.007955095549629289,
+        "gail_loss": "agent",
+        "hidden_size": 128,
+        "learning_rate": 0.0008567749021970193,
+        "n_embeddings": 64,
+        "n_steps": 128,
+        "policy_lr": 0.0005945087478723237,
+        "reward_factor": 1
+    },
+    "run_id": "w58bfnz1"
+}

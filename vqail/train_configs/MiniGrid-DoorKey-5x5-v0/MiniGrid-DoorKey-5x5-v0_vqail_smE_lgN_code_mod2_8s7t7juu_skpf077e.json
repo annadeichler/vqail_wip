@@ -1,0 +1,17 @@
+{
+    "ep_rew_mean": 0.90802,
+    "parameters": {
+        "batch_size": 256,
+        "cnn_version": "minigrid_2",
+        "embedding_dim": 8,
+        "ent_coef": 0.00854180110697234,
+        "gail_loss": "agent",
+        "hidden_size": 128,
+        "learning_rate": 0.0008227672150522421,
+        "n_embeddings": 238,
+        "n_steps": 128,
+        "policy_lr": 0.00043889043968188687,
+        "reward_factor": 1
+    },
+    "run_id": "skpf077e"
+}

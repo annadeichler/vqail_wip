@@ -1,0 +1,17 @@
+{
+    "ep_rew_mean": 0.9536319999999999,
+    "parameters": {
+        "batch_size": 256,
+        "cnn_version": "minigrid_2",
+        "embedding_dim": 32,
+        "ent_coef": 0.002361138968683349,
+        "gail_loss": "agent",
+        "hidden_size": 32,
+        "learning_rate": 0.0003971315778329628,
+        "n_embeddings": 16,
+        "n_steps": 128,
+        "policy_lr": 0.0005791619766518442,
+        "reward_factor": 1
+    },
+    "run_id": "hfshusev"
+}

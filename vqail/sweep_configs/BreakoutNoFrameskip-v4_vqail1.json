@@ -1,0 +1,18 @@
+
+{
+    "method": "random",
+    "metric": {"name": "ep_rew_mean", "goal": "maximize"},
+    "parameters": {
+            "learning_rate": {"min": 0.0001, "max": 0.00075},
+            "reward_factor": [-1], 
+            "gail_loss": [ "agent","gailfo"], 
+            "ent_coef": {"min":  0.001, "max":  0.01}, 
+            "policy_lr": {"min":  0.00001, "max": 0.0005},
+            "n_steps": [128,256], 
+            "batch_size": [256],
+            "n_embeddings":[8,16,32,64],
+            "hidden_size": [64,100], 
+            "embedding_dim":[32, 64, 128,256]
+
+    }
+}

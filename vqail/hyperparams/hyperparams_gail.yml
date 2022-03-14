@@ -1,0 +1,570 @@
+# Tuned (Fast VM)
+Pendulum-v0:
+  n_envs: 4
+  total_timesteps: !!float 2500
+  lr_schedule_main: False
+  lr_schedule_agent: False
+  learning_rate: !!float 3e-4
+  policy_kwargs: "{'policy': 'MlpPolicy',
+                   'verbose': 1,
+                   'n_steps': 512,
+                   'batch_size': 64,
+                   'gae_lambda': 0.99,
+                   'gamma': 0.99,
+                   'ent_coef': 1e-3,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 10,
+                   'clip_range': 0.2,
+                   'target_kl': 0.01,
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+# Tuned (Fast VM, Colab)
+CartPole-v1:
+  n_envs: 4
+  total_timesteps: !!float 300
+  learning_rate: !!float 3e-4
+  policy_kwargs: "{'policy': 'MlpPolicy',
+                   'verbose': 1,
+                   'n_steps': 512,
+                   'learning_rate': 3e-4,
+                   'batch_size': 64,
+                   'n_epochs': 10
+                  }"
+  gail: "{'discrim_hidden_size': 8}"
+
+# Tuned (Fast VM)
+Acrobot-v1:
+  n_envs: 4
+  norm_obs: True
+  total_timesteps: !!float 2500
+  learning_rate: !!float 3e-3
+  lr_schedule_main: True
+  lr_schedule_agent: True
+  ent_decay: 0.999
+  policy_kwargs: "{'policy': 'MlpPolicy',
+                   'verbose': 1,
+                   'n_steps': 512,
+                   'gamma': 0.99,
+                   'gae_lambda': 0.95,
+                   'learning_rate': 3e-3,
+                   'ent_coef': 0.2,
+                   'n_epochs': 10,
+                   'target_kl': 0.01,
+                   }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Tuned (Fast VM)
+Hopper-v2:
+  norm_obs: False
+  n_envs: 4
+  total_timesteps: !!float 1200
+  learning_rate: !!float 3e-4
+  policy_kwargs: "{'policy': 'MlpPolicy',
+                   'verbose': 1,
+                   'n_steps': 1024,
+                   'learning_rate': 3e-4,
+                   'gamma': 0.99,
+                   'ent_coef': 0.0,
+                   'gae_lambda': 0.97,
+                   'n_epochs': 10,
+                   'sde_sample_freq': 4,
+                   'max_grad_norm': 0.5,
+                   'use_sde': True,
+                   'clip_range': 0.4,
+                   'vf_coef': 0.5,
+                   'batch_size': 64,
+                   'policy_kwargs': {
+                                      'log_std_init': -1,
+                                      'net_arch': [dict(pi=[256, 256], vf=[256, 256])]
+                                    }
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Tuned (Fast VM)
+HalfCheetah-v2:
+  norm_obs: False
+  n_envs: 4
+  total_timesteps: !!float 1200
+  learning_rate: !!float 3e-4
+  policy_kwargs: "{'policy': 'MlpPolicy',
+                   'verbose': 1,
+                   'n_steps': 1024,
+                   'learning_rate': 1e-4,
+                   'gamma': 0.99,
+                   'ent_coef': 0.0,
+                   'gae_lambda': 0.97,
+                   'n_epochs': 10,
+                   'sde_sample_freq': 4,
+                   'max_grad_norm': 0.5,
+                   'use_sde': True,
+                   'clip_range': 0.4,
+                   'vf_coef': 0.5,
+                   'batch_size': 128,
+                   'policy_kwargs': {
+                                      'log_std_init': -1,
+                                      'net_arch': [dict(pi=[256, 256], vf=[256, 256])]
+                                    }
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+FetchPickAndPlace-v1:
+  time_limit: False
+  mujoco_img: True
+  obs_only: True
+  n_envs: 8
+  total_timesteps: !!float 1200
+  reward_factor: -1
+  learning_rate: !!float 3e-3
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 256,
+                   'learning_rate': 3e-4,
+                   'gamma': 0.99,
+                   'ent_coef': 0.2,
+                   'gae_lambda': 0.95,
+                   'n_epochs': 10,
+                   'clip_range': 0.2,
+                   'vf_coef': 0.5,
+                   'batch_size': 32,
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Tuned (Colab)
+MiniGrid-Empty-Random-6x6-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 8
+  gail_loss: 'agent'
+  n_envs: 2
+  total_timesteps: !!float 450
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 128,
+                   'batch_size': 32,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 2,
+                   'ent_coef': 0.1,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+# Tuned (Colab)
+MiniGrid-Empty-Random-8x8-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 8
+  gail_loss: 'agent'
+  n_envs: 2
+  total_timesteps: !!float 450
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 128,
+                   'batch_size': 32,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 2,
+                   'ent_coef': 0.1,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+# Tuned (Colab)
+MiniGrid-Empty-Random-16x16-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 4
+  gail_loss: 'agent'
+  n_envs: 4
+  total_timesteps: !!float 900
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 256,
+                   'batch_size': 64,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 4,
+                   'ent_coef': 0.1,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+# Untuned
+MiniGrid-Empty-Random-32x32-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 2
+  gail_loss: 'agent'
+  n_envs: 4
+  total_timesteps: !!float 900
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 256,
+                   'batch_size': 128,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 10,
+                   'ent_coef': 0.1,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+# Tuned (Colab)
+MiniGrid-Empty-8x8-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 8
+  gail_loss: 'agent'
+  n_envs: 4
+  total_timesteps: !!float 400
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 256,
+                   'batch_size': 64,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 4,
+                   'ent_coef': 0.001,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+MiniGrid-DoorKey-5x5-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 10
+  gail_loss: 'agent'
+  n_envs: 8
+  total_timesteps: !!float 250
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 128,
+                   'batch_size': 32,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 2,
+                   'ent_coef': 0.1,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+MiniGrid-DoorKey-8x8-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 10
+  gail_loss: 'agent'
+  n_envs: 8
+  total_timesteps: !!float 250
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 128,
+                   'batch_size': 32,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 2,
+                   'ent_coef': 0.1,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+
+MiniGrid-RedBlueDoors-6x6-v0:
+  mini_grid: True
+  obs_only: True
+  tile_size: 6
+  gail_loss: 'agent'
+  n_envs: 8
+  total_timesteps: !!float 250
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 128,
+                   'batch_size': 32,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 2,
+                   'ent_coef': 0.1,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+
+# Tuned (Azure VM, Colab)
+MiniWorld-OneRoom-v0:
+  obs_only: True
+  n_envs: 8
+  frame_stack: 4
+  gail_loss: 'gailfo'
+  total_timesteps: !!float 450
+  reward_factor: 1
+  learning_rate: !!float 1e-4
+  lr_schedule_main: False
+  lr_schedule_agent: False
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 256,
+                   'batch_size': 128,
+                   'learning_rate': 5e-5,
+                   'n_epochs': 10,
+                   'ent_coef': 0.01,
+                   'clip_range': 0.2,
+                   'gamma': 0.99,
+                   'gae_lambda': 0.97,
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Tuned (Azure VM)
+MiniWorld-Hallway-v0:
+  obs_only: True
+  n_envs: 8
+  frame_stack: 4
+  gail_loss: 'agent'
+  total_timesteps: !!float 450
+  reward_factor: 1
+  learning_rate: !!float 3e-4
+  lr_schedule_main: False
+  lr_schedule_agent: False
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 256,
+                   'batch_size': 64,
+                   'learning_rate': 3e-4,
+                   'n_epochs': 10,
+                   'ent_coef': 0.01,
+                   'clip_range': 0.2,
+                   'gamma': 0.99,
+                   'gae_lambda': 0.97,
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Tuned (Azure VM)
+# n_embeddings changed 32 to 256 for test
+MiniWorld-TMaze-v0:
+  obs_only: True
+  n_envs: 8
+  frame_stack: 4
+  gail_loss: 'gailfo'
+  total_timesteps: !!float 800
+  reward_factor: 1
+  learning_rate: !!float 1e-4
+  lr_schedule_main: False
+  lr_schedule_agent: False
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 1024,
+                   'batch_size': 128,
+                   'learning_rate': 5e-5,
+                   'n_epochs': 10,
+                   'ent_coef': 0.01,
+                   'clip_range': 0.2,
+                   'gamma': 0.99,
+                   'gae_lambda': 0.97,
+                  }"
+  gail: "{'discrim_hidden_size': 128}"
+
+# Tuned (Colab)
+MiniWorld-YMaze-v0:
+  obs_only: True
+  n_envs: 8
+  frame_stack: 4
+  gail_loss: 'gailfo'
+  total_timesteps: !!float 1500
+  reward_factor: 1
+  learning_rate: !!float 1e-4
+  lr_schedule_main: False
+  lr_schedule_agent: False
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 1024,
+                   'batch_size': 128,
+                   'learning_rate': 5e-5,
+                   'n_epochs': 10,
+                   'ent_coef': 0.01,
+                   'clip_range': 0.2,
+                   'gamma': 0.99,
+                   'gae_lambda': 0.97,
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Tuned (Colab)
+MiniWorld-TMazeRight-v0:
+  obs_only: True
+  n_envs: 8
+  frame_stack: 4
+  gail_loss: 'gailfo'
+  total_timesteps: !!float 1200
+  reward_factor: 1
+  learning_rate: 0.000149
+  lr_schedule_main: False
+  lr_schedule_agent: False
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 512,
+                   'batch_size': 128,
+                   'learning_rate': 5e-5,
+                   'n_epochs': 10,
+                   'ent_coef': 0.002478,
+                   'clip_range': 0.2,
+                   'gamma': 0.99,
+                   'gae_lambda': 0.97,
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Tuned (Colab)
+MiniWorld-TMazeLeft-v0:
+  obs_only: True
+  n_envs: 16
+  frame_stack: 4
+  gail_loss: 'gailfo'
+  total_timesteps: !!float 1500
+  reward_factor: 1
+  learning_rate: !!float 1e-4
+  lr_schedule_main: False
+  lr_schedule_agent: False
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 512,
+                   'batch_size': 128,
+                   'learning_rate': 5e-5,
+                   'n_epochs': 10,
+                   'ent_coef': 0.01,
+                   'clip_range': 0.2,
+                   'gamma': 0.99,
+                   'gae_lambda': 0.97,
+                  }"
+  gail: "{'discrim_hidden_size': 128}"
+
+MiniWorld-PickupObjs-v0:
+  obs_only: True
+  gail_loss: 'agent'
+  n_envs: 16
+  frame_stack: 4
+  total_timesteps: !!float 900
+  reward_factor: 1
+  learning_rate: !!float 0.0005899771090863373
+  ent_decay: 1.0
+  policy_kwargs: "{'policy': 'CnnPolicy',
+                   'verbose': 1,
+                   'n_steps': 256,
+                   'batch_size': 128,
+                   'learning_rate': 0.00017950128954338752,
+                   'n_epochs': 10,
+                   'ent_coef': 0.19034357744903857,
+                   'clip_range': 0.1,
+                   'gamma': 0.99
+                  }"
+  gail: "{'discrim_hidden_size': 100}"
+
+# Gentype 7 on 16x16 grid, expert 8x8
+# # Tuned (Colab)
+# MiniGrid-Empty-Random-16x16-v0:
+#   mini_grid: True
+#   obs_only: True
+#   tile_size: 4
+#   gail_loss: 'agent'
+#   n_envs: 4
+#   total_timesteps: !!float 600
+#   reward_factor: 1
+#   learning_rate: !!float 3e-4
+#   ent_decay: 1.0
+#   policy_kwargs: "{'policy': 'CnnPolicy',
+#                    'verbose': 1,
+#                    'n_steps': 256,
+#                    'batch_size': 64,
+#                    'learning_rate': 3e-4,
+#                    'n_epochs': 4,
+#                    'ent_coef': 0.1,
+#                    'clip_range': 0.1,
+#                    'gamma': 0.99
+#                   }"
+#   gail: "{'discrim_hidden_size': 256}"
+
+# Gentype 7 on 32x32 grid, expert 8x8
+# MiniGrid-Empty-Random-32x32-v0:
+#   mini_grid: True
+#   obs_only: True
+#   tile_size: 2
+#   gail_loss: 'agent'
+#   n_envs: 4
+#   total_timesteps: !!float 800
+#   reward_factor: 1
+#   learning_rate: !!float 3e-4
+#   ent_decay: 1.0
+#   policy_kwargs: "{'policy': 'CnnPolicy',
+#                    'verbose': 1,
+#                    'n_steps': 256,
+#                    'batch_size': 64,
+#                    'learning_rate': 3e-4,
+#                    'n_epochs': 4,
+#                    'ent_coef': 0.1,
+#                    'clip_range': 0.1,
+#                    'gamma': 0.99
+#                   }"
+#   gail: "{'discrim_hidden_size': 256}"
+
+BreakoutNoFrameskip-v4:
+  obs_only: True
+  n_envs: 8
+  reward_factor: 1
+  atari: True
+  gail_loss: "agent"
+  frame_stack: 4
+  total_timesteps: !!float 2500
+  learning_rate: !!float 0.0008109616043360727
+  policy_kwargs: "{'policy': 'MlpPolicy',
+                   'verbose': 1,
+                   'n_steps': 512,
+                   'batch_size': 64,
+                   'ent_coef': 0.24111672234771772,
+                   'learning_rate': 0.0006840859272601772,
+                   'n_epochs': 4,
+                   'clip_range': 0.1,
+                  }"
+  gail: "{'discrim_hidden_size': 64}"
+
+PongNoFrameskip-v4:
+  obs_only: True
+  n_envs: 8
+  atari: True
+  frame_stack: 4
+  total_timesteps: !!float 2500
+  learning_rate: !!float 3e-4
+  policy_kwargs: "{'policy': 'MlpPolicy',
+                   'verbose': 1,
+                   'n_steps': 128,
+                   'batch_size': 256,
+                   'ent_coef': 0.01,
+                   'learning_rate': 2.5e-4,
+                   'n_epochs': 4,
+                   'clip_range': 0.1,
+                  }"
+  gail: "{'discrim_hidden_size': 256}"
+

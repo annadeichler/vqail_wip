@@ -1,0 +1,17 @@
+{
+    "ep_rew_mean": 0.95122,
+    "parameters": {
+        "batch_size": 256,
+        "cnn_version": "minigrid_2",
+        "embedding_dim": 32,
+        "ent_coef": 0.006781341894251309,
+        "gail_loss": "agent",
+        "hidden_size": 64,
+        "learning_rate": 0.0008613914046444954,
+        "n_embeddings": 4,
+        "n_steps": 128,
+        "policy_lr": 0.0003218414901582283,
+        "reward_factor": 1
+    },
+    "run_id": "s27ecidr"
+}

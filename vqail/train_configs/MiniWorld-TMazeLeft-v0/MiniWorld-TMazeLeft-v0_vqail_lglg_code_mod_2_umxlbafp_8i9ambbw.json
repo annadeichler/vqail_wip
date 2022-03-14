@@ -1,0 +1,17 @@
+{
+    "ep_rew_mean": 0.8663071999999999,
+    "parameters": {
+        "batch_size": 256,
+        "cnn_version": "miniworld_1",
+        "embedding_dim": 8,
+        "ent_coef": 0.008966240517819458,
+        "gail_loss": "agent",
+        "hidden_size": 32,
+        "learning_rate": 0.0007392284587554525,
+        "n_embeddings": 16,
+        "n_steps": 256,
+        "policy_lr": 0.0003770893546777115,
+        "reward_factor": 1
+    },
+    "run_id": "8i9ambbw"
+}

@@ -1,0 +1,15 @@
+{
+    "ep_rew_mean": 0.8875000000000002,
+    "parameters": {
+        "batch_size": 256,
+        "discrim_hidden_size": 128,
+        "ent_coef": 0.0004896815977782883,
+        "gail_loss": "agent",
+        "hidden_size": 128,
+        "latent_size": 16,
+        "learning_rate": 0.0005332924290290974,
+        "n_steps": 256,
+        "policy_lr": 0.0007462676795803097,
+        "reward_factor": 1
+    }
+}
