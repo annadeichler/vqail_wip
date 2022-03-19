@@ -4,6 +4,7 @@ ALGOS = ["vqail", "vail", "gail", "all"]
 
 def str2bool(v):
     if isinstance(v, bool):
+        print(v)
         return v
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
@@ -11,7 +12,6 @@ def str2bool(v):
         return False
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
-
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -27,7 +27,6 @@ def get_args():
     parser.add_argument(
         "--cnn_version", help="which cnn to use ", type=str, default="",
     )
-
     parser.add_argument(
         "--algo",
         help="RL Algorithm (gail, vail or vqvail, or 'all')",
@@ -35,6 +34,15 @@ def get_args():
         type=str,
         required=True,
         choices=ALGOS,
+    )
+    parser.add_argument(
+        "--log_wandb",
+        help="Log wandb or not ",
+        default=False,
+        type=str2bool,
+    )
+    parser.add_argument(
+        "--n_seeds", help="number of seeds to train on", type=int, default=1
     )
     parser.add_argument(
         "-log",

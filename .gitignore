@@ -133,4 +133,10 @@ dmypy.json
 ./vqail/results/
 **/results/
 results/
+./vqail/tran_configs/
+**/train_configs/
+train_configs/
+./vqail/sweep_configs/
+**/sweep_configs/
+sweep_configs/
 wandb/

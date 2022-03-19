@@ -25,6 +25,6 @@ env DISPLAY=:1 docker run \
   -e DISPLAY=$DISPLAY \
   -e QT_X11_NO_MITSHM=1 \
  -v ${PWD}/display/Xauthority:/tmp/.Xauthority \
- -v /home/deichler/vqail/:/vqail \
+ -v /home/deichler/vqail_wip/:/vqail \
   vqail \
   bash

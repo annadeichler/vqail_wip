@@ -72,13 +72,11 @@ def train(args,seeds,expert_traj,device,config_dict):
             set_random_seed(seed, using_cuda)
             envs, eval_env, norm_env = create_env(hyperparams, args, seed, tune=True)
             expert_traj = modify_expert_data(expert_traj, envs, args)
-            return
-            # ALGOS[args.algo].train(
-            # envs, eval_env, norm_env, args, hyperparams, saved_hyperparams, expert_traj,
-            # device, seed, tune=True,tb_log_name=tb_log_name,run_id=run.id,cuda_id=args.cuda_id
-            # )
-
-
+            # return
+            ALGOS[args.algo].train(
+            envs, eval_env, norm_env, args, hyperparams, saved_hyperparams, expert_traj,
+            device, seed, tune=True,tb_log_name=tb_log_name,run_id=run.id,cuda_id=args.cuda_id
+            )
 
 
 def tune(args, seeds, expert_traj, device):
@@ -92,12 +90,13 @@ def tune(args, seeds, expert_traj, device):
             
             update_config_hypes(hyperparams,config)
 
+            
+
             name = args.algo.upper() + "Algorithm"
             # tb_log_name = '_'.join([name , run.id, str(seed), str(config["n_steps"])])
             tb_log_name = '_'.join([name , run.id, str(seed), str(args.cuda_id)])
 
             using_cuda = True if device == th.device("cuda") else False
-
 
             args = set_up_parameters(hyperparams, args)
             set_random_seed(seed, using_cuda)
@@ -115,18 +114,17 @@ def main(hyperparams, args, expert_traj, device):
     for k,v in sweep_config['parameters'].items():
         if  isinstance(v, list):
             sweep_config["parameters"].update({k:dict(values=v)})
-    # if args.algo == 'gail':
-    #     sweep_config["parameters"].update({"discrim_hidden_size": dict(values=[32,64,128]),})
 
-    # seeds = [1000]
     seeds=np.random.randint(3,1e4,1)
 
     sweep_config.update({"name": "_".join([args.env_id, args.algo, args.tag])})
 
     print("running tuning")
+    print(sweep_config)
     sweep_id = wandb.sweep(sweep_config)
     wandb_train_func = functools.partial(tune, args, seeds, expert_traj, device)
     wandb.agent(sweep_id, function=wandb_train_func, count=args.count)
+
 
 if __name__ == "__main__":
     args = get_args()

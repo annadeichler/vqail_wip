@@ -79,6 +79,7 @@ def train(args,fp,expert_traj,device,config_dict):
         # project_name = "_".join(["final_train",args.env_id,args.algo,tune_run_id,args.tag])
         project_name = "_".join(["final_train",args.env_id,args.algo,args.tag])
         print(project_name)
+        # print(project_name)
         print(config_dict)
         with wandb.init(project=project_name,config=config_dict) as run:
             update_config_hypes(hyperparams,config_dict)
@@ -87,13 +88,13 @@ def train(args,fp,expert_traj,device,config_dict):
             using_cuda = True if device == th.device("cuda") else False
             pprint(saved_hyperparams)
             args = set_up_parameters(hyperparams, args)
-            set_random_seed(seed, using_cuda)
-            envs, eval_env, norm_env = create_env(hyperparams, args, seed, tune=True)
-            expert_traj = modify_expert_data(expert_traj, envs, args)
-            ALGOS[args.algo].train(
-            envs, eval_env, norm_env, args, hyperparams, saved_hyperparams, expert_traj,
-            device, seed, tune=True,tb_log_name=tb_log_name,run_id=run.id,cuda_id=args.cuda_id
-            )
+            # set_random_seed(seed, using_cuda)
+            # envs, eval_env, norm_env = create_env(hyperparams, args, seed, tune=True)
+            # expert_traj = modify_expert_data(expert_traj, envs, args)
+            # ALGOS[args.algo].train(
+            # envs, eval_env, norm_env, args, hyperparams, saved_hyperparams, expert_traj,
+            # device, seed, tune=True,tb_log_name=tb_log_name,run_id=run.id,cuda_id=args.cuda_id
+            # )
 
 def load_config(args):
     cdir= os.path.join(DIR_CONFIG,args.env_id)

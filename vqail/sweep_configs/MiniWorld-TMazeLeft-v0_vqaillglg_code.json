@@ -5,16 +5,15 @@
     "parameters": {
             "learning_rate": {"min": 0.0004, "max": 0.0009},
             "reward_factor": [1], 
-            "cnn_version": ["miniworld_1","miniworld_2","miniworld_3"],
+            "cnn_version": ["miniworld_3"],
             "gail_loss": [ "agent"], 
             "ent_coef": {"min":  0.007, "max":  0.009}, 
             "policy_lr": {"min":  0.0003, "max": 0.0006},
-            "n_steps": [128,256], 
+            "n_steps": [128], 
             "batch_size": [256],
-            "n_embeddings":[4, 8, 16],
-            "hidden_size": [32,64], 
-            "embedding_dim":[8, 16, 32]
-
+            "n_embeddings":[128],
+            "hidden_size": [128], 
+            "embedding_dim":[128]
     }
 }
 

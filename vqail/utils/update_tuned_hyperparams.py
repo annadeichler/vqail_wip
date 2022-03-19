@@ -104,6 +104,7 @@ def get_results(args):
     fnames=os.listdir(dir)
     wb_files=os.listdir(WANDB_BASE_DIR)
     runs= [f.strip('.yaml').split('-')[1] for f in fnames]
+    print(runs)
     d=OrderedDict()
     for r in runs:
         try: 
@@ -148,6 +149,7 @@ def save_config(d_run,algo,env,tag):
     out_name = "{}_{}_{}_{}_{}.json".format(env,algo,tag,args.sweep_id,d_run[0])
     print(out_name)
     fpath=os.path.join(TUNED_HYPES_DIR,env,out_name)
+    print(fpath)
     with open(fpath, 'w') as fp:
             json.dump(d_run[1], fp, sort_keys=True, indent=4)
 
@@ -159,11 +161,11 @@ def main(args):
     
         print("updating")
         d,env,algo,tag= get_results(args)
-        
         for i in range(len(d)):
             d_run=list(d.items())[i]
-            if d_run[1]['ep_rew_mean']<args.rew_thr:
-                break
+            if d_run[1]['ep_rew_mean']<args.rew_thr or  np.isnan(d_run[1]['ep_rew_mean']):
+                continue
+            print(d_run[1]['ep_rew_mean'])
             save_config(d_run,algo,env,tag)
 
 

@@ -1,3 +1,4 @@
+from ast import Break
 from platform import version
 import random
 import yaml
@@ -26,7 +27,6 @@ from stable_baselines3.common.preprocessing import (
     get_flattened_obs_dim,
 )
 from stable_baselines3.common.utils import set_random_seed
-
 
 def modify_expert_data_for_train(expert_traj, env, obs_only=False):
     """Preprocess observations and one-hot encode actions"""
@@ -118,6 +118,24 @@ def get_obs_actions(state_action, env, device, obs_only=False):
             1,
         ).to(device=device)
     return state_action
+
+def read_hypes(
+    algo, env_id, _is_atari=False, custom_hyperparams=None, verbose=0
+) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    # Code taken from Stable Baselines 3 Zoo
+    # Load hyperparameters from yaml file
+    with open(f"hyperparams/hyperparams_{algo}.yml", "r") as f:
+        hyperparams_dict = yaml.safe_load(f)
+        if env_id in list(hyperparams_dict.keys()):
+            hyperparams = hyperparams_dict[env_id]
+        elif _is_atari:
+            hyperparams = hyperparams_dict["atari"]
+        else:
+            raise ValueError(f"Hyperparameters not found for {algo}-{env_id}")
+    if custom_hyperparams is not None:
+        hyperparams.update(custom_hyperparams)
+
+    return hyperparams
 
 
 def read_hyperparameters(
@@ -282,3 +300,46 @@ def save_model_checkpoint(model_name, model_state_dict, il_iteration, ppo_timest
                 'ppo_timesteps': ppo_timesteps,
                 'model_state_dict': model_state_dict,
                 }, path)
+
+
+
+def update_config_hypes(args,hyperparams,config):
+    print("updating hyperparams")
+    print(config)
+    hyperparams["learning_rate"] = config["learning_rate"]
+    hyperparams["gail_loss"] = config["gail_loss"]
+    try:
+        hyperparams["reward_factor"] = config["reward_factor"]
+    except: KeyError
+    try:
+        hyperparams["cnn_version"] = config["cnn_version"]
+        print("updated cnn_Version")
+    except: KeyError
+    hyperparams.update({"policy_kwargs": eval(hyperparams["policy_kwargs"])})
+    hyperparams["policy_kwargs"]["n_steps"] = config["n_steps"]
+    hyperparams["policy_kwargs"]["ent_coef"] = config["ent_coef"]
+    hyperparams["policy_kwargs"]["batch_size"] = config["batch_size"]
+    hyperparams["policy_kwargs"]["learning_rate"] = config["policy_lr"]
+
+    try:
+        hyperparams["policy_kwargs"]["gae_lambda"] = config["gae_lambda"]
+    except: KeyError
+
+    hyperparams.update({"policy_kwargs": str(hyperparams["policy_kwargs"])})
+
+    if args.algo == 'gail':
+        hyperparams.update({"gail": eval(hyperparams["gail"])})
+        hyperparams["gail"]["discrim_hidden_size"] = config["discrim_hidden_size"]
+        hyperparams.update({"gail": str(hyperparams["gail"])})
+    elif args.algo == 'vail':
+        hyperparams.update({"vail": eval(hyperparams["vail"])})
+        hyperparams["vail"]["latent_size"] = config["latent_size"]
+        hyperparams.update({"vail": str(hyperparams["vail"])})
+    elif args.algo == 'vqail':
+        hyperparams.update({"vqvail": eval(hyperparams["vqvail"])})
+        hyperparams["vqvail"]["embedding_dim"] = config["embedding_dim"]
+        hyperparams["vqvail"]["hidden_size"] = config["hidden_size"]
+        hyperparams["vqvail"]["n_embeddings"] = config["n_embeddings"]
+        hyperparams.update({"vqvail": str(hyperparams["vqvail"])})
+
+    return hyperparams

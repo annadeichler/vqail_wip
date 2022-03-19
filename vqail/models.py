@@ -1099,7 +1099,7 @@ class VQVAEImage(nn.Module):
             ('relu2', nn.ReLU()),
             ])
 
-
+        # minigrid-doorkey traininig was 3 input channels insetad of n_input_channels
         elif cnn_version =='minigrid_1':
             d_cnn = OrderedDict([
             ('conv1', nn.Conv2d(self.n_input_channels,32,3,2,1)),
@@ -1113,7 +1113,7 @@ class VQVAEImage(nn.Module):
     
         elif cnn_version =='minigrid_2':
             d_cnn = OrderedDict([
-                ('conv1', nn.Conv2d(3,16,2)),
+                ('conv1', nn.Conv2d(self.n_input_channels,16,2)),
                 ('relu1', nn.ReLU()),
                 ('maxpool1', nn.MaxPool2d(kernel_size=(2, 2), stride=2)),
                 ('conv2', nn.Conv2d(16,32, kernel_size=(2, 2))),
@@ -1125,7 +1125,7 @@ class VQVAEImage(nn.Module):
 
         elif cnn_version=="minigrid_3":
             d_cnn =  OrderedDict([
-                ('conv1', nn.Conv2d(3,16,2)),
+                ('conv1', nn.Conv2d(self.n_input_channels,16,2)),
                 ('relu1', nn.ReLU()),
                 ('maxpool1', nn.MaxPool2d(kernel_size=(2, 2), stride=2)),
                 ('conv2', nn.Conv2d(16,32, kernel_size=(2, 2))),
@@ -1136,29 +1136,48 @@ class VQVAEImage(nn.Module):
                 ])
 
 
-        elif cnn_version =='miniworld_1': # (6, 9)
+        elif cnn_version =='miniworld_1': # (8, 10)
             d_cnn = OrderedDict([
-            ('conv1', nn.Conv2d(self.n_input_channels,32,3,2,0)),
-            ('relu1', nn.ReLU()),
-            ('conv2', nn.Conv2d(32,32,3,2,0)),
-            ('relu2', nn.ReLU()),
-            ('conv3', nn.Conv2d(32,32,3,2,0)),
-            ('relu3', nn.ReLU()),
+            # ('conv1', nn.Conv2d(self.n_input_channels,32,3,2,0)),
+            # ('relu1', nn.ReLU()),
+            # ('conv2', nn.Conv2d(32,32,3,2,0)),
+            # ('relu2', nn.ReLU()),
+            # ('conv3', nn.Conv2d(32,32,3,2,0)),
+            # ('relu3', nn.ReLU()),
+            # ])
+            ('conv1', nn.Conv2d(self.n_input_channels,32,3,2,1)),
+            ('elu1', nn.ELU()),
+            ('conv2', nn.Conv2d(32,32,3,2,1)),
+            ('elu2', nn.ELU()),
+            ('conv3', nn.Conv2d(32,32,3,2,1)), # 50 -> 7x7
+            ('elu3', nn.ELU()),
             ])
 
-        elif cnn_version =='miniworld_2': # (5, 7)
+        elif cnn_version =='miniworld_2': # (5, 8)
             d_cnn = OrderedDict([
-            ('conv1', nn.Conv2d(self.n_input_channels,32,5,2,0)),
+            # ('conv1', nn.Conv2d(self.n_input_channels,32,5,2,0)),
+            # ('relu1', nn.ReLU()),
+            # ('batchnorm1',  nn.BatchNorm2d(32)),
+            # ('conv2', nn.Conv2d(32,32,5,2,0)),
+            # ('relu2', nn.ReLU()),
+            # ('batchnorm2',  nn.BatchNorm2d(32)),
+            # ('conv3', nn.Conv2d(32,32,4,2,0)),
+            # ('relu3', nn.ReLU()),
+            # ('batchnorm3',  nn.BatchNorm2d(32)),
+            # ])
+            ('conv1', nn.Conv2d(self.n_input_channels,16,2)), 
             ('relu1', nn.ReLU()),
-            ('batchnorm1',  nn.BatchNorm2d(32)),
-            ('conv2', nn.Conv2d(32,32,5,2,0)),
+            ('maxpool1', nn.MaxPool2d(kernel_size=(2, 2), stride=2)),
+            ('conv2', nn.Conv2d(16,32, kernel_size=(2, 2))),
             ('relu2', nn.ReLU()),
-            ('batchnorm2',  nn.BatchNorm2d(32)),
-            ('conv3', nn.Conv2d(32,32,4,2,0)),
-            ('relu3', nn.ReLU()),
-            ('batchnorm3',  nn.BatchNorm2d(32)),
-            ])
+            ('maxpool2', nn.MaxPool2d(kernel_size=(2, 2), stride=2)),
+            ('conv3', nn.Conv2d(32,32, kernel_size=(2, 2))),
+            ('relu3', nn.ReLU()), # 50 -> 10
+            # ('maxpool3', nn.MaxPool2d(kernel_size=(2, 2), stride=2)),
+            # ('conv4', nn.Conv2d(32,32, kernel_size=(2, 2))),
+            # ('relu4', nn.ReLU()), # 50 -> 10
 
+            ])
             
 
         elif cnn_version =='miniworld_3': # 10x15

@@ -124,6 +124,10 @@ ENV PYTHONPATH "${PYTHONPATH}:/vqail/gym-miniworld/"
 RUN export PYTHONPATH=$PYTHONPATH:$HOME/vqail/gym-miniworld
 
 RUN pip install atari-py==0.2.5
+RUN git config --global url."https://".insteadOf git://
+
+RUN pip install git+git://github.com/denisyarats/dmc2gym.git
+
 # COPY  ../utils/  /go/src/app
 # RUN mkdir -p /vqail/gym-minigrid
 

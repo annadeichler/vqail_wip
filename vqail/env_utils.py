@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional, Type, Union, Callable, Tuple
 import gym
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
-
+import dmc2gym
 from gym_minigrid.wrappers import ImgObsWrapper, RGBImgObsWrapper
 from wrappers import DictImgObsWrapper, DictObsWrapper
 
@@ -51,6 +51,45 @@ def make_mujoco_img_env(
 
     return _init
 
+
+def make_dmc_env(
+    env_id: str,
+    rank: int,
+    wrapper_class: None,
+    seed: int = 0,
+    monitor_dir: Optional[str] = None,
+) -> Callable:
+    """
+    Utility function for multiprocessed env.
+
+    :param env_id: (str) the environment ID
+    :param num_env: (int) the number of environment you wish to have in subprocesses
+    :param seed: (int) the inital seed for RNG
+    :param rank: (int) index of the subprocess
+    :return: (Callable)
+    """
+
+    def _init() -> gym.Env:
+        # env = gym.make(env_id, reward_type="sparse")
+        env = dmc2gym.make(domain_name=env_id, visualize_reward=False, from_pixels=True, seed=seed)
+        if wrapper_class:
+            env = wrapper_class(env)
+        env = DictObsWrapper(env)
+        env.seed(seed + rank)
+        env.action_space.seed(seed + rank)
+
+        monitor_kwargs = {}
+        monitor_path = (
+            os.path.join(monitor_dir, str(rank)) if monitor_dir is not None else None
+        )
+        # Create the monitor folder if needed
+        if monitor_path is not None:
+            os.makedirs(monitor_dir, exist_ok=True)
+        env = Monitor(env, filename=monitor_path, **monitor_kwargs)
+
+        return env
+
+    return _init
 
 def make_mujoco_env(
     env_id: str,
@@ -118,3 +157,4 @@ def get_mujoco_vec_env(
     )
     eval_env = DictObsWrapper(wrapper_class(gym.make(env_id, reward_type="sparse")))
     return venv, eval_env
+

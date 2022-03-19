@@ -17,7 +17,7 @@ for i in $flist; do
     config_id=${var/%$suffix}
     echo $config_id
 
-    CUDA_VISIBLE_DEVICES=$cuda_id  xvfb-run -a -s "-screen 0 1024x768x24 -ac +extension GLX +render -noreset"  python3.8 run_final.py  --cuda-id $cuda_id --env-id $env --algo $algo  --config_id  $config_id --timesteps $ts  --reg expire_codes   --tag $tag 
+    CUDA_VISIBLE_DEVICES=$cuda_id  xvfb-run -a -s "-screen 0 1024x768x24 -ac +extension GLX +render -noreset"  python3.8 main.py  --cuda-id $cuda_id --env-id $env --algo $algo  --config_id  $config_id --timesteps $ts  --reg expire_codes   --tag $tag 
     
 done
 
